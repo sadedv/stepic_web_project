@@ -4,8 +4,9 @@ import socket
 class EchoHandler(asyncore.dispatcher_with_send):                               
         def handle_read (self):                                                 
                 data = self.recv(1024)                                               
-                if not data: break
+                if data:
                 if data == "close" or "Close": conn.close()
+                print(data)
                 conn.send(data)
                 conn.close() 
                                                      

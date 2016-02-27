@@ -3,12 +3,12 @@ import socket
                                                                                 
 class EchoHandler(asyncore.dispatcher_with_send):                               
         def handle_read (self):                                                 
-                data = recv(1024)                                               
-                if data:                                                        
-                        if data == "Close" or data == "close": self.close()                                    
-                        print(data)                                             
-                        self.send(data)    
-                        self.close()                                       
+                data = self.recv(1024)                                               
+                if not data: break
+                if data == "close" or "Close": conn.close()
+                conn.send(data)
+                conn.close() 
+                                                     
                                                                                 
 class EchoServer(asyncore.dispatcher):                                          
         def __init__(self, host, port):                                         
